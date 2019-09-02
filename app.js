@@ -4,6 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const multer = require("multer");
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 const transactionRoutes = require("./transactions/transactionRoutes");
 const menuRoutes = require("./menus/menuRoutes");
@@ -11,7 +12,7 @@ const orderRoutes = require("./orders/orderRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const DB_URI = `mongodb://localhost:27017/shopin`;
+const DB_URI = process.env.DATABASE_URI;
 
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -64,4 +65,5 @@ mongoose
       if (err) throw err;
       console.log(`Server running on port ${PORT}`);
     });
-  });
+  })
+  .catch(err => console.log(err));

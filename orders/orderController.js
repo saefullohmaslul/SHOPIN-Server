@@ -1,6 +1,5 @@
 const Order = require("./order");
 const Menu = require("../menus/menu");
-const Transaction = require("../transactions/transaction");
 
 exports.index = async (req, res, next) => {
   try {

@@ -46,7 +46,7 @@ exports.update = async (req, res, next) => {
     transaction.finishedTime = finishedTime;
 
     await transaction.save();
-    await Order.deleteMany({ transactionId });
+    // await Order.deleteMany({ transactionId });
 
     res.status(200).json({ transaction });
   } catch (error) {
