@@ -4,8 +4,8 @@ exports.index = async (req, res, next) => {
   try {
     const menu = await Menu.find();
     if (!menu) {
-      const error = new Error();
-      error.message = "Menu not found, please add menu before launch the app";
+      const error = new Error("Failed");
+      error.data = "Menu not found, please add menu before launch the app";
       error.status = 404;
       throw err;
     }

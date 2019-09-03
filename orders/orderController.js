@@ -5,8 +5,8 @@ exports.index = async (req, res, next) => {
   try {
     const orders = await Order.find().populate("menu._id");
     if (!orders) {
-      const error = new Error();
-      error.message = "Orders not found";
+      const error = new Error("Failed");
+      error.data = "Orders not found";
       error.status = 404;
       throw error;
     }
@@ -22,8 +22,8 @@ exports.show = async (req, res, next) => {
   try {
     const orders = await Order.find({ transactionId }).populate("menuId");
     if (!orders) {
-      const error = new Error();
-      error.message = "Orders not found";
+      const error = new Error("Failed");
+      error.data = "Orders not found";
       error.status = 404;
       throw error;
     }

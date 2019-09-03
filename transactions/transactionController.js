@@ -1,5 +1,4 @@
 const Transaction = require("./transaction");
-const Order = require("../orders/order");
 
 exports.store = async (req, res, next) => {
   const { tableNumber } = req.body;
@@ -31,8 +30,8 @@ exports.update = async (req, res, next) => {
   try {
     const transaction = await Transaction.findOne({ _id: transactionId });
     if (!transaction) {
-      const error = new Error();
-      error.message = "Transaction not found";
+      const error = new Error("Failed");
+      error.data = "Transaction not found";
       error.status = 404;
       throw error;
     }
@@ -46,7 +45,6 @@ exports.update = async (req, res, next) => {
     transaction.finishedTime = finishedTime;
 
     await transaction.save();
-    // await Order.deleteMany({ transactionId });
 
     res.status(200).json({ transaction });
   } catch (error) {
